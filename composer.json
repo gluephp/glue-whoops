@@ -1,0 +1,20 @@
+{
+    "name": "gluephp/glue-whoops",
+    "description": "Use whoops in Glue",
+    "type": "library",
+    "require": {
+        "filp/whoops": "2.1.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Magnus Eriksson",
+            "email": "gluephp@reloop.se"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Glue\\Whoops\\": "src/"
+        }
+    }
+}
