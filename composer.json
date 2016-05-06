@@ -3,6 +3,7 @@
     "description": "Use whoops in Glue",
     "type": "library",
     "require": {
+        "php": ">=5.5.0",
         "filp/whoops": "2.1.*"
     },
     "license": "MIT",
