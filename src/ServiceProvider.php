@@ -10,11 +10,6 @@ class ServiceProvider implements ServiceProviderInterface
 {
     public function register(App $glue)
     {
-        if ($glue->config->get('debug', false) !== true) {
-            // We only want to use Whoops if the app is in debug mode
-            return;
-        }
-
         $whoops = new Run;
 
         $logger = $glue->bound('Psr\Log\LoggerInterface')
@@ -22,7 +17,13 @@ class ServiceProvider implements ServiceProviderInterface
             : null;
 
         $whoops->pushHandler(new PlainTextHandler($logger));
-        $whoops->pushHandler(new PrettyPageHandler);
+
+        if ($glue->config->get('debug', false) !== true) {
+            $whoops->pushHandler(new ProductionHandler($logger));
+        } else {
+            $whoops->pushHandler(new PrettyPageHandler($logger));
+        }
+
         $whoops->register();
 
         $glue->singleton('Whoops\Run', function() use($whoops) {
